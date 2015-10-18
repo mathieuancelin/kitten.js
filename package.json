@@ -1,0 +1,16 @@
+{
+  "name": "kittens",
+  "version": "1.0.0",
+  "description": "Just some random kittens",
+  "main": "main.js",
+  "scripts": {
+    "start": "open index.html",
+    "build": "browserify --standalone Kittens main.js -o kittens.js; uglifyjs kittens.js -p 1 -mc -o kittens.min.js"
+  },
+  "author": "Mathieu ANCELIN",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "uglifyjs": "^2.4.10"
+  }
+}
