@@ -1,7 +1,7 @@
-Kitten.js
+Kittens.js
 -------------------
 
-Kitten js is a dumb library to show kitten running on you webpage.
+Kittens.js is a dumb library to show kittens running on you webpage.
 
 ```
 npm install --save kittens
@@ -12,6 +12,6 @@ npm install --save kittens
 // but if you use modules
 var Kittens = require('kittens');
 
-Kittens.init(); // show 5 kitten
-Kittens.init(42); // show 42 kitten
+Kittens.init(); // show 5 kittens
+Kittens.init(42); // show 42 kittens
 ```
