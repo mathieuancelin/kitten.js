@@ -419,6 +419,7 @@
     </div>
     <script src="kittens.min.js"></script>
     <script>
+      Kittens.NyanCat.kittens = 5;
       var nyancat = false;
       var context = Kittens.run(5);
       document.getElementById('nyancat').addEventListener('click', function(e) {
@@ -429,7 +430,7 @@
           context = Kittens.run(Kittens.NyanCat);
         } else {
           document.getElementById('nyancat').innerHTML = 'NyanCats';
-          context = Kittens.run();
+          context = Kittens.run(5);
         }
       });
       document.getElementById('add').addEventListener('click', function(e) {

@@ -20,6 +20,9 @@ function Kitten(opts) {
   var posY = (Math.random() * (window.innerHeight - (h * 2))) + h;
   var increment = (Math.random() * inc) + 2;
   var node = document.createElement('img');
+  var debugNode = document.createElement('span');
+  debugNode.setAttribute('style', 'font-size: 12px;display: block; position: fixed; top: '
+    + posY + 'px; left: ' + posX + 'px;z-index: 999999; border: 1px solid red;');
   node.setAttribute('src', src);
   node.setAttribute('style', 'width: ' + srcWidth + 'px; height: ' + srcHeight + 'px;display: block; position: fixed; top: '
     + posY + 'px; left: ' + posX + 'px;z-index: 99999');
@@ -40,20 +43,29 @@ function Kitten(opts) {
       node.style['-o-transform'] = 'scaleX(-1)';
       node.style['-webkit-transform'] = 'scaleX(-1)';
       node.style['transform'] = 'scaleX(-1)';
+      posX = window.innerWidth - 151;
     } else if (posX <= 0) {
       increment = 0 - increment;
       node.style['-moz-transform'] = '';
       node.style['-o-transform'] = '';
       node.style['-webkit-transform'] = '';
       node.style['transform'] = '';
+      posX = 1;
     }
     posX = posX + increment;
     node.style.left = posX + 'px';
+    if (opts.debug) {
+      debugNode.style.left = posX + 'px';
+      debugNode.innerHTML = 'pos : ' + posX.toFixed(2);
+    }
   }
 
   return {
     inject: function() {
       document.body.appendChild(node);
+      if (opts.debug) {
+        document.body.appendChild(debugNode);
+      }
     },
     update: move,
     destroy: function() {
@@ -65,7 +77,7 @@ function Kitten(opts) {
 function run(opts) {
   var running = true;
   if (Object.prototype.toString.call(opts) === '[object Number]') {
-    opts = { kittens: 0 };
+    opts = { kittens: opts };
   }
   opts = opts || {};
   opts.kittens = opts.kittens || 0;
