@@ -48,11 +48,15 @@ function Kitten(inc, w, h) {
     inject: function() {
       document.body.appendChild(node);
     },
-    update: move
+    update: move,
+    destroy: function() {
+      document.body.removeChild(node);
+    }
   };
 }
 
 function run(opts) {
+  var running = true;
   if (Object.prototype.toString.call(opts) === '[object Number]') {
     opts = { kittens: 5 };
   }
@@ -72,9 +76,36 @@ function run(opts) {
     kittens.forEach(function(k) {
       k.update();
     });
-    requestAnimationFrame(update);
+    if (running) {
+      requestAnimationFrame(update);
+    }
   }
   requestAnimationFrame(update);
+  return {
+    remove: function(nbr) {
+      nbr = nbr || 1;
+      for (var j = 0; j < nbr; j++) {
+        var k = kittens.pop();
+        if (typeof k !== 'undefined') {
+          k.destroy();
+        }
+      }
+    },
+    add: function(nbr) {
+      nbr = nbr || 1;
+      for (var j = 0; j < nbr; j++) {
+        var k = Kitten(opts.baseIncrement, opts.widthOffset, opts.heightOffset);
+        k.inject();
+        kittens.push(k);
+      }
+    },
+    stop: function() {
+      running = false;
+      kittens.forEach(function(k) {
+        k.destroy();
+      });
+    }
+  };
 }
 
 module.exports = {
