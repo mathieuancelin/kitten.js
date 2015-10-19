@@ -8,13 +8,19 @@ var requestAnimationFrame =
     setTimeout(callback, 1000 / 60);
   };
 
-function Kitten(inc, w, h) {
+function Kitten(opts) {
+  var inc = opts.baseIncrement;
+  var w = opts.widthOffset
+  var h = opts.heightOffset
+  var src = opts.gif;
+  var srcWidth = opts.gifWidth;
+  var srcHeight = opts.gifHeight;
   var posX = (Math.random() * (window.innerWidth - (w * 2))) + w;
   var posY = (Math.random() * (window.innerHeight - (h * 2))) + h;
   var increment = (Math.random() * inc) + 2;
   var node = document.createElement('img');
-  node.setAttribute('src', img);
-  node.setAttribute('style', 'width: 157px; height: 109px;display: block; position: fixed; top: '
+  node.setAttribute('src', src);
+  node.setAttribute('style', 'width: ' + srcWidth + 'px; height: ' + srcHeight + 'px;display: block; position: fixed; top: '
     + posY + 'px; left: ' + posX + 'px;z-index: 99999');
 
   if (Math.random() < 0.5) {
@@ -65,9 +71,12 @@ function run(opts) {
   opts.baseIncrement = opts.baseIncrement || 5;
   opts.widthOffset = opts.widthOffset || 100;
   opts.heightOffset = opts.heightOffset || 150;
+  opts.gif = opts.gif || img;
+  opts.gifWidth = opts.gifWidth || 157;
+  opts.gifHeight = opts.gifHeight || 109;
   var kittens = [];
   for (var i = 0; i < opts.kittens; i++) {
-    var k = Kitten(opts.baseIncrement, opts.widthOffset, opts.heightOffset);
+    var k = Kitten(opts);
     k.inject();
     kittens.push(k);
   }
@@ -94,7 +103,7 @@ function run(opts) {
     add: function(nbr) {
       nbr = nbr || 1;
       for (var j = 0; j < nbr; j++) {
-        var k = Kitten(opts.baseIncrement, opts.widthOffset, opts.heightOffset);
+        var k = Kitten(opts);
         k.inject();
         kittens.push(k);
       }
@@ -108,7 +117,14 @@ function run(opts) {
   };
 }
 
+var NyanCatConf = {
+  gif: 'http://vignette3.wikia.nocookie.net/nickfanon/images/6/6b/NyanCat.gif/revision/latest?cb=20120408034008',
+  gifWidth: 100,
+  gifHeight: 100
+};
+
 module.exports = {
   init: run,
-  run: run
+  run: run,
+  NyanCat: NyanCatConf
 };
