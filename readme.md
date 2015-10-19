@@ -12,6 +12,12 @@ npm install --save kittens
 // but if you use modules
 var Kittens = require('kittens');
 
-Kittens.init(); // show 5 kittens
-Kittens.init(42); // show 42 kittens
+Kittens.run(); // show 5 kittens
+Kittens.run(42); // show 42 kittens
+Kittens.run({
+  kittens: 42,
+  baseIncrement: 7,
+  widthOffset: 200,
+  heightOffset: 200
+});
 ```

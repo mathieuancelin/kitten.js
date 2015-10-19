@@ -9,10 +9,10 @@ var requestAnimationFrame =
     setTimeout(callback, 1000 / 60);
   };
 
-function Kitten() {
-  var posX = (Math.random() * (window.innerWidth - 200)) + 100;
-  var posY = (Math.random() * (window.innerHeight - 400)) + 150;
-  var increment = (Math.random() * 5) + 2;
+function Kitten(inc, w, h) {
+  var posX = (Math.random() * (window.innerWidth - (w * 2))) + w;
+  var posY = (Math.random() * (window.innerHeight - (h * 2))) + h;
+  var increment = (Math.random() * inc) + 2;
   var node = document.createElement('img');
   node.setAttribute('src', img);
   node.setAttribute('style', 'width: 157px; height: 109px;display: block; position: fixed; top: '
@@ -53,24 +53,34 @@ function Kitten() {
   };
 }
 
-module.exports = {
-  init: function(nbr) {
-    nbr = nbr || 5;
-    var kittens = [];
-    for (var i = 0; i < nbr; i++) {
-      var k = Kitten();
-      k.inject();
-      kittens.push(k);
-    }
+function run(opts) {
+  if (Object.prototype.toString.call(opts) === '[object Number]') {
+    opts = { kittens: 5 };
+  }
+  opts = opts || {};
+  opts.kittens = opts.kittens || 5;
+  opts.baseIncrement = opts.baseIncrement || 5;
+  opts.widthOffset = opts.widthOffset || 100;
+  opts.heightOffset = opts.heightOffset || 150;
+  var kittens = [];
+  for (var i = 0; i < opts.kittens; i++) {
+    var k = Kitten(opts.baseIncrement, opts.widthOffset, opts.heightOffset);
+    k.inject();
+    kittens.push(k);
+  }
 
-    function update() {
-      kittens.forEach(function(k) {
-        k.update();
-      });
-      requestAnimationFrame(update);
-    }
+  function update() {
+    kittens.forEach(function(k) {
+      k.update();
+    });
     requestAnimationFrame(update);
   }
+  requestAnimationFrame(update);
+}
+
+module.exports = {
+  init: run,
+  run: run
 };
 
 },{}]},{},[1])(1)
