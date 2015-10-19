@@ -12,7 +12,7 @@ npm install --save kittens
 // but if you use modules
 var Kittens = require('kittens');
 
-var kittens1 = Kittens.run(); // show 5 kittens
+var kittens1 = Kittens.run(); // show 0 kittens
 var kittens2 = Kittens.run(42); // show 42 kittens
 var kittens3 = Kittens.run({
   kittens: 42, // show 42 kittens

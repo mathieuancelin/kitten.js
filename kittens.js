@@ -65,10 +65,10 @@ function Kitten(opts) {
 function run(opts) {
   var running = true;
   if (Object.prototype.toString.call(opts) === '[object Number]') {
-    opts = { kittens: 5 };
+    opts = { kittens: 0 };
   }
   opts = opts || {};
-  opts.kittens = opts.kittens || 5;
+  opts.kittens = opts.kittens || 0;
   opts.baseIncrement = opts.baseIncrement || 5;
   opts.widthOffset = opts.widthOffset || 100;
   opts.heightOffset = opts.heightOffset || 150;
