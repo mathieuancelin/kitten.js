@@ -135,8 +135,16 @@ var NyanCatConf = {
   gifHeight: 100
 };
 
+var PigsConf = {
+  gif: 'http://www.chezmaya.com/cartesvirtuelles/queljournee/pig2.gif',
+  gifWidth: 100,
+  gifHeight: 109,
+  kittens: 5
+};
+
 module.exports = {
   init: run,
   run: run,
-  NyanCat: NyanCatConf
+  NyanCat: NyanCatConf,
+  PigsConf: PigsConf
 };
