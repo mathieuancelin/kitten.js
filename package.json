@@ -1,6 +1,6 @@
 {
   "name": "kittens",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Just some random kittens",
   "main": "main.js",
   "scripts": {
