@@ -7,6 +7,12 @@ Kittens.js is a dumb library to show kittens running on your webpage.
 npm install --save kittens
 ```
 
+or import the script from npmcdn with
+
+```html
+<script src="https://npmcdn.com/kittens/dist/kittens.min.js"></script>
+```
+
 ```javascript
 // Kittens is also expose in the global scope
 // but if you use modules
